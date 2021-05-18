@@ -1,0 +1,17 @@
+/* 
+  NewslyStrings.strings
+  Newsly
+
+  Created by Kislay Kishore on 12/05/21.
+  
+*/
+
+"HomeTitle" = "Headlines";
+"NA" = "N/A";
+"AppName" = "Newsly";
+"JustNow" = "Just now";
+"%@ mins-ago" = "%@ mins ago";
+"%@ hours-ago" = "%@ hours ago";
+"%@ days-ago" = "%@ days ago";
+"retry" = "Retry";
+"defaultError" = "Something went wrong!";
