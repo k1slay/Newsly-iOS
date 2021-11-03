@@ -15,7 +15,10 @@ struct NewslyApp: App {
     var body: some Scene {
         WindowGroup {
             if viewModel.articles != nil {
-                HeadlinesView(articles: viewModel.articles!)
+                HeadlinesView(articles: viewModel.articles!).onReceive(NotificationCenter.default.publisher(
+                    for: UIApplication.willEnterForegroundNotification)) { _ in
+                        viewModel.refreshIfNeeded()
+                    }
             } else if viewModel.isError {
                 ErrorView(errorMessage: viewModel.errorMessage, onRetryClick: {
                     fetchHeadlines()
@@ -27,13 +30,10 @@ struct NewslyApp: App {
     }
     
     private func fetchHeadlines() {
-        let locale = Locale.current
-        guard let country = locale.regionCode else {
-            print("Error getting country code")
-            viewModel.isError = true
+        guard let country = viewModel.getCountryCode() else {
             return
         }
         viewModel.fetchHeadlines(country: country)
     }
-
+    
 }
